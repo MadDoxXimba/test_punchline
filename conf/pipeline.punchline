@@ -1,0 +1,61 @@
+{
+  "settings": {
+    "spark.driver.port": 20000,
+    "spark.punch.version": "6.0",
+    "spark.punch.application.deploy.mode": "client",
+    "spark.punch.runtime": "spark",
+    "spark.port.maxRetries": 16,
+    "spark.punch.tenant": "mytenant",
+    "spark.metrics.runtime.id": "dce89913-5cf5-46ce-ada1-f93f8644990f",
+    "spark.punch.name": "punchline",
+    "spark.blockManager.port": 22000,
+    "spark.punch.channel": "basic",
+    "spark.driver.blockManager.port": 21000,
+    "spark.punch.platform.id": "standalone"
+  },
+  "channel": "basic",
+  "name": "punchline",
+  "platform_id": "standalone",
+  "runtime": "spark",
+  "runtime_id": "dce89913-5cf5-46ce-ada1-f93f8644990f",
+  "initial_punchline_path": "/tmp/punch9910318362424718674/",
+  "dag": [
+    {
+      "settings": {
+        "input_data": [
+          {
+            "date": "{{ from }}",
+            "name": "from_date"
+          },
+          {
+            "date": "{{ to }}",
+            "name": "to_date"
+          }
+        ]
+      },
+      "component": "input",
+      "publish": [
+        {
+          "stream": "data"
+        }
+      ],
+      "type": "dataset_generator"
+    },
+    {
+      "settings": {
+        "truncate": false
+      },
+      "component": "show",
+      "subscribe": [
+        {
+          "component": "input",
+          "stream": "data"
+        }
+      ],
+      "type": "show"
+    }
+  ],
+  "type": "punchline",
+  "version": "6.0",
+  "tenant": "mytenant"
+}
